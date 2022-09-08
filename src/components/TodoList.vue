@@ -1,9 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+      <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
         <i class="checkBtn fa-solid fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
-            v-on:click="togglecomplte(todoItem)"></i>
+            v-on:click="togglecomplte(todoItem, index)"></i>
         <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
         <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
           <i class="fa-solid fa-trash-can"></i>
@@ -15,33 +15,13 @@
 
 <script>
 export default {
-  data: function() {
-    return{
-      todoItems: []
-    }
-  },
-  created: function() {
-    if(localStorage.length>0) {
-      for(var i=0; i<localStorage.length; i++){
-        //console.log(localStorage.key(i));
-        if(localStorage.key(i) !== ''){
-          //localStorage.getItem(localStorage.key(i)); //value가져옴
-          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-        }
-      }
-    }
-  },
+  props: ['propsdata'],
   methods : {
     removeTodo(todoItem, index){
-      console.log(todoItem, index);
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index,1); //해당 인덱스부터 n개 삭제해서 새로운 list 반환
+      this.$emit('removeItem', todoItem, index);
     },
-    togglecomplte(todoItem) {
-      todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    togglecomplte(todoItem, index) {
+      this.$emit('toggleItem', todoItem, index);
     }
   }
 }

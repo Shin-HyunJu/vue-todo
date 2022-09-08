@@ -1,8 +1,15 @@
 <template>
-  <div class="clearAllContainer">
-    <span class="clearAllBtn" v-on:click="clearTodo">
-      Clear All
-    </span>
+  <div>
+    <div class="clearAllContainer">
+      <span class="clearAllBtn" v-on:click="clearTodo">
+        Clear All
+      </span>
+    </div>
+    <div class="clearAllContainer">
+      <span class="clearAllBtn" v-on:click="changeHeader">
+        Change Header
+      </span>
+    </div>      
   </div>
 </template>
 
@@ -10,8 +17,13 @@
 export default {
   methods: {
     clearTodo(){
-      localStorage.clear();
+      this.$emit("clearItem");
+      //localStorage.clear();
+    },
+    changeHeader() {
+      this.$emit("changeHeader");
     }
+
   }
 }
 </script>
@@ -24,6 +36,7 @@ export default {
     background-color: white;
     border-radius: 5px;
     margin: 0 auto;
+    margin-bottom: 5px;
   }
   .clearAllBtn{
     color: #e20303;

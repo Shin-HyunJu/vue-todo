@@ -18,16 +18,16 @@ export default {
   methods: {
     addTodo: function(){
         if(this.newTodoItem !== ''){
-          var obj = {completed: false, item: this.newTodoItem}; //check여부도 같이 넣기 위한 obj
-          localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); //key,value, 자바스크립트를 string으로 변환해서 넣음.
-          //localStorage.setItem(this.newTodoItem, obj);
+          //this.$emit('이벤트이름', 인자1, 인자2, ...);
+          this.$emit('addTodoItem', this.newTodoItem); //하위에서 addTodoItem이라는 이벤트가 발생 -> 상위로 올라감
           this.clearInput();
         }
     },
     clearInput: function(){
       this.newTodoItem="";
     }
-  }
+  },
+
 }
 </script>
 
