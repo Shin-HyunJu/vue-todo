@@ -6,7 +6,7 @@
     <!-- v-on: 하위 컴포넌트에서 발생시킨 이벤트 = "현재 컴포넌트 메소드 명" -->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput> 
     <TodoList v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem" v-bind:propsdata="todoItems"></TodoList>
-    <TodoFooter v-on:clearItem="clearAllItem" v-on:changeHeader="changeHeader"></TodoFooter>
+    <TodoFooter v-on:clearItem="clearAllItems" v-on:changeHeader="changeHeader"></TodoFooter>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
   data: function() {
     return{
       todoItems: [],
-      currentHeader: "TodoHeader"
+      currentHeader: "TodoHeader2"
     }
   },
   methods:{
@@ -41,12 +41,12 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItem: function() {
+    clearAllItems: function() {
       this.todoItems = [];
       localStorage.clear();
     },
     changeHeader: function() {
-      this.currentHeader = "TodoHeader2";
+      this.currentHeader = "TodoHeader";
     }
   },
   created: function() {
