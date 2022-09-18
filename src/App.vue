@@ -49,18 +49,6 @@ export default {
       this.currentHeader = "TodoHeader";
     }
   },
-  created() {
-    if(localStorage.length>0) {
-      for(let i=0; i<localStorage.length; i++){
-        //console.log(localStorage.key(i));
-        if(localStorage.key(i) !== ''){
-          //localStorage.getItem(localStorage.key(i)); //value가져옴
-          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-        }
-      }
-    }
-  },
   components: {
     // 컴포넌트 태그명: 컴포넌트 내용
     //'TodoHeader' : TodoHeader,
