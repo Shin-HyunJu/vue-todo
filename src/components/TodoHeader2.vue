@@ -8,7 +8,7 @@
 <script>
 export default {
 
-  data: function() {
+  data() {
     return {
       title : "TODO it!"
     }
