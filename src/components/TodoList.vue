@@ -15,13 +15,17 @@
 
 <script>
 export default {
-  props: ['propsdata'],
   methods : {
     removeTodo(todoItem, index){
-      this.$emit('removeItem', todoItem, index);
+      //this.$emit('removeItem', todoItem, index);
+      this.$store.commit('removeOneItem', todoItem, index);
     },
     togglecomplte(todoItem, index) {
-      this.$emit('toggleItem', todoItem, index);
+      // this.$emit('toggleItem', todoItem, index);
+
+      //mutation을 동작하기 위해서 commit 사용
+      //todoItem과 index를 하나의 객체로 전달
+      this.$store.commit('toggleOneItem', {todoItem, index});
     }
   }
 }

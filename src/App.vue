@@ -4,9 +4,9 @@
     <component :is="currentHeader"></component>
     <!-- <TodoHeader></TodoHeader> -->
     <!-- v-on: 하위 컴포넌트에서 발생시킨 이벤트 = "현재 컴포넌트 메소드 명" -->
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput> 
-    <TodoList v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem" v-bind:propsdata="todoItems"></TodoList>
-    <TodoFooter v-on:clearItem="clearAllItems" v-on:changeHeader="changeHeader"></TodoFooter>
+    <TodoInput></TodoInput> 
+    <TodoList></TodoList>
+    <TodoFooter v-on:changeHeader="changeHeader"></TodoFooter>
   </div>
 </template>
 
@@ -20,31 +20,10 @@ import TodoFooter from './components/TodoFooter.vue'
 export default {
   data() {
     return{
-      todoItems: [],
       currentHeader: "TodoHeader2"
     }
   },
   methods:{
-    addOneItem(newTodoItem) {
-      const obj = {completed: false, item: newTodoItem}; //check여부도 같이 넣기 위한 obj
-      localStorage.setItem(newTodoItem, JSON.stringify(obj)); //key,value, 자바스크립트를 string으로 변환해서 넣음.
-      this.todoItems.push(obj);
-    },
-    removeOneItem(todoItem, index) {
-      console.log(todoItem, index);
-      localStorage.removeItem(todoItem.item); //key값을 선택해서 지울 수 있도록
-      this.todoItems.splice(index,1); //해당 인덱스부터 n개 삭제해서 새로운 list 반환
-    },
-    toggleOneItem(todoItem, index) {
-      this.todoItems[index].completed = !this.todoItems[index].completed;  
-      //todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems() {
-      this.todoItems = [];
-      localStorage.clear();
-    },
     changeHeader() {
       this.currentHeader = "TodoHeader";
     }

@@ -35,7 +35,8 @@ export default {
     addTodo: function(){
         if(this.newTodoItem !== ''){
           //this.$emit('이벤트이름', 인자1, 인자2, ...);
-          this.$emit('addTodoItem', this.newTodoItem); //하위에서 addTodoItem이라는 이벤트가 발생 -> 상위로 올라감
+          //this.$emit('addTodoItem', this.newTodoItem); //하위에서 addTodoItem이라는 이벤트가 발생 -> 상위로 올라감
+          this.$store.commit('addOneItem', this.newTodoItem);
           this.clearInput();
         }else{
           this.showModal = !this.showModal;
