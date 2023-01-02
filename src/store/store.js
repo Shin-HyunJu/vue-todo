@@ -27,6 +27,12 @@ export const store = new Vuex.Store({
     todoItems: storage.fetch(),
   },
 
+  getters: {
+    storedTodoItems(state) {
+      return state.todoItems;
+    }
+  },
+
   /**
    * mutation의 특성
    * 매개변수로 항상 state를 가져온다!
